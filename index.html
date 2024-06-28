@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latin to Arabic Transliteration</title>
+    <title>Latin to アラビア文字変換</title>
     <script>
         // ラテン文字とアラビア語の文字のマッピングを定義
         const latinToArabic = {
@@ -25,7 +25,7 @@
             'd': 'ض',
             't': 'ط',
             'z': 'ظ',
-            'a': 'ع',
+            "'": 'ع',
             'gh': 'غ',
             'f': 'ف',
             'q': 'ق',
@@ -36,7 +36,6 @@
             'h': 'ه',
             'w': 'و',
             'y': 'ي',
-            "'": 'ء',
             'i': 'إ',
             'u': 'ؤ',
         };
@@ -67,7 +66,7 @@
     </script>
 </head>
 <body>
-    <h1>Latin to Arabic Transliteration</h1>
+    <h1>変換結果</h1>
     <label for="latinText">Enter Latin Text:</label>
     <input type="text" id="latinText">
     <button onclick="transliterate()">Transliterate</button>
