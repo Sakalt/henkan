@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latin to Arabic Transliteration</title>
+    <script>
+        // ラテン文字とアラビア語の文字のマッピングを定義
+        const latinToArabic = {
+            'g': 'ج',   // jeem
+            'e': 'اي',   // ayの二重母音
+            'a': 'ا',
+            'b': 'ب',
+            't': 'ت',
+            'th': 'ث',
+            'h': 'ح',
+            'kh': 'خ',
+            'd': 'د',
+            'dh': 'ذ',
+            'r': 'ر',
+            'z': 'ز',
+            's': 'س',
+            'sh': 'ش',
+            's': 'ص',
+            'd': 'ض',
+            't': 'ط',
+            'z': 'ظ',
+            'a': 'ع',
+            'gh': 'غ',
+            'f': 'ف',
+            'q': 'ق',
+            'k': 'ك',
+            'l': 'ل',
+            'm': 'م',
+            'n': 'ن',
+            'h': 'ه',
+            'w': 'و',
+            'y': 'ي',
+            "'": 'ء',
+            'i': 'إ',
+            'u': 'ؤ',
+        };
+
+        function latinToArabicTransliteration(latinText) {
+            let arabicText = "";
+            let skipNext = false;
+            for (let i = 0; i < latinText.length; i++) {
+                if (skipNext) {
+                    skipNext = false;
+                    continue;
+                }
+                if (i + 1 < latinText.length && latinToArabic[latinText.substring(i, i + 2)]) {
+                    arabicText += latinToArabic[latinText.substring(i, i + 2)];
+                    skipNext = true;
+                } else {
+                    arabicText += latinToArabic[latinText[i]] || latinText[i];
+                }
+            }
+            return arabicText;
+        }
+
+        function transliterate() {
+            const latinText = document.getElementById('latinText').value;
+            const arabicText = latinToArabicTransliteration(latinText);
+            document.getElementById('arabicText').innerText = arabicText;
+        }
+    </script>
+</head>
+<body>
+    <h1>Latin to Arabic Transliteration</h1>
+    <label for="latinText">Enter Latin Text:</label>
+    <input type="text" id="latinText">
+    <button onclick="transliterate()">Transliterate</button>
+    <h2>Arabic Text:</h2>
+    <p id="arabicText"></p>
+</body>
+</html>
