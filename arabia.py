@@ -1,47 +1,53 @@
-arabic_to_latin = {
-    'ا': 'a',
-    'ب': 'b',
-    'ت': 't',
-    'ث': 'th',
-    'ج': 'j',
-    'ح': 'h',
-    'خ': 'kh',
-    'د': 'd',
-    'ذ': 'dh',
-    'ر': 'r',
-    'ز': 'z',
-    'س': 's',
-    'ش': 'sh',
-    'ص': 's',
-    'ض': 'd',
-    'ط': 't',
-    'ظ': 'z',
-    'ع': 'a',
-    'غ': 'gh',
-    'ف': 'f',
-    'ق': 'q',
-    'ك': 'k',
-    'ل': 'l',
-    'م': 'm',
-    'ن': 'n',
-    'ه': 'h',
-    'و': 'w',
-    'ي': 'y',
-    'ى': 'a',
-    'ء': "'",
-    'أ': 'a',
-    'إ': 'i',
-    'ؤ': 'u',
-    'ئ': 'i',
+latin_to_arabic = {
+    'a': 'ا',
+    'b': 'ب',
+    't': 'ت',
+    'th': 'ث',
+    'j': 'ج',
+    'g': 'ج',
+    'h': 'ح',
+    'kh': 'خ',
+    'd': 'د',
+    'dh': 'ذ',
+    'r': 'ر',
+    'z': 'ز',
+    's': 'س',
+    'sh': 'ش',
+    's': 'ص',
+    'd': 'ض',
+    't': 'ط',
+    'z': 'ظ',
+    'a': 'ع',
+    'gh': 'غ',
+    'f': 'ف',
+    'q': 'ق',
+    'k': 'ك',
+    'l': 'ل',
+    'm': 'م',
+    'n': 'ن',
+    'h': 'ه',
+    'w': 'و',
+    'y': 'ي',
+    "'": 'ء',
+    'i': 'إ',
+    'u': 'ؤ',
+    'e': 'اي',
 }
-
-def arabic_to_latin_transliteration(arabic_text):
-    latin_text = ""
-    for char in arabic_text:
-        latin_text += arabic_to_latin.get(char, char)
-    return latin_text
+def latin_to_arabic_transliteration(latin_text):
+    arabic_text = ""
+    skip_next = False
+    for i in range(len(latin_text)):
+        if skip_next:
+            skip_next = False
+            continue
+        if i + 1 < len(latin_text) and latin_text[i:i+2] in latin_to_arabic:
+            arabic_text += latin_to_arabic[latin_text[i:i+2]]
+            skip_next = True
+        else:
+            arabic_text += latin_to_arabic.get(latin_text[i], latin_text[i])
+    return arabic_text
 
 # テスト
-arabic_text = "مرحبا"
-latin_text = arabic_to_latin_transliteration(arabic_text)
-print(latin_text)  # "mrhb"
+latin_text = "marhba"
+arabic_text = latin_to_arabic_transliteration(latin_text)
+print(arabic_text)  # "مرحبا"
